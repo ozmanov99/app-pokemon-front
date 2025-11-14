@@ -1,0 +1,23 @@
+<header>
+  <nav class="navbar">
+    <div class="logo">
+<!--      <img src="assets/images/pokemon.png" alt="Pokéball" />-->
+      <h1>PokéApp</h1>
+    </div>
+
+    <ul class="nav-links">
+      <li><a routerLink="/pokemons" routerLinkActive="active">Pokémons</a></li>
+      <li><a routerLink="/dresseurs" routerLinkActive="active">Dresseurs</a></li>
+      <li><a routerLink="/echange" routerLinkActive="active">Échanges</a></li>
+      <li><a routerLink="/collection" routerLinkActive="active">Ma Collection</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="content">
+  <router-outlet></router-outlet>
+</main>
+
+<footer>
+  <p>© 2025 PokéApp — Tous droits réservés</p>
+</footer>

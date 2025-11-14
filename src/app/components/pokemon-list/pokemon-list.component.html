@@ -1,0 +1,39 @@
+<div class="boosters-container">
+  <div class="booster-btn eau" (click)="ouvrirBooster('Eau')" #lightEau>
+    Eau
+    <div class="booster-light"></div>
+  </div>
+  <div class="booster-btn feu" (click)="ouvrirBooster('Feu')" #lightFeu>
+    Feu
+    <div class="booster-light"></div>
+  </div>
+  <div class="booster-btn electrik" (click)="ouvrirBooster('Électrik')" #lightElec>
+    Électrik
+    <div class="booster-light"></div>
+  </div>
+  <div class="booster-btn plante" (click)="ouvrirBooster('Plante')" #lightPlante>
+    Plante
+    <div class="booster-light"></div>
+  </div>
+  <div class="booster-btn vol" (click)="ouvrirBooster('Vol')" #lightVol>
+    Vol
+    <div class="booster-light"></div>
+  </div>
+</div>
+
+<div class="card-container">
+  <div class="pokemon-card" *ngFor="let p of pokemons">
+    <div class="pokemon-image">
+      <img [src]="p.imageUrl || 'assets/default-pokemon.png'" alt="{{ p.nom }}">
+    </div>
+    <div class="pokemon-info">
+      <h3>{{ p.nom }}</h3>
+      <p>Type : {{ p.type }}</p>
+      <p>Niveau : {{ p.niveau }}</p>
+      <p class="rarete">Rareté : {{ p.rarete }}</p>
+    </div>
+  </div>
+</div>
+
+
+

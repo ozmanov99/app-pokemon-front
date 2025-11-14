@@ -1,0 +1,56 @@
+h2 {
+  margin-bottom: 15px;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+/* Container des cartes */
+.cartes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+/* Carte individuelle identique à l'affichage booster */
+.carte {
+  width: 150px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.carte:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Image de la carte */
+.carte img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Info du Pokémon */
+.carte div {
+  padding: 8px 5px;
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Animation pour l'ajout de carte */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.carte.ng-animate {
+  animation: fadeIn 0.4s ease forwards;
+}

@@ -1,0 +1,10 @@
+<h2>Ma Collection</h2>
+<div *ngIf="maCollection.length === 0">Collection est vide.</div>
+
+<div class="cartes">
+  <div *ngFor="let pokemon of maCollection" class="carte">
+    <img [src]="pokemon.imageUrl || 'assets/default-pokemon.png'" alt="{{pokemon.nom}}">
+    <div>{{pokemon.nom}} ({{pokemon.type}})</div>
+    <button class="delete-btn" (click)="supprimer(pokemon.id)">Supprimer</button>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<h2>Liste des Dresseurs</h2>
+
+<div *ngIf="dresseurs.length === 0">Aucun dresseur trouvé.</div>
+
+<ul>
+  <li *ngFor="let d of dresseurs">
+    {{ d.nom }} ({{ d.pseudo }}) - Niveau {{ d.niveau }} - Rôle: {{ d.role }}
+    <button (click)="supprimer(d.id)">Supprimer</button>
+  </li>
+</ul>

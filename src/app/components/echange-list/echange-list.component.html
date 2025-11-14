@@ -1,0 +1,9 @@
+<h2>Liste des Échanges</h2>
+<div *ngIf="echanges.length === 0">Aucun échange trouvé.</div>
+<ul>
+  <li *ngFor="let e of echanges">
+    {{ e.dresseur1.pseudo }} ↔ {{ e.dresseur2.pseudo }} - Statut: {{ e.statut }}
+    <button (click)="accepter(e.id)">Accepter</button>
+    <button (click)="refuser(e.id)">Refuser</button>
+  </li>
+</ul>

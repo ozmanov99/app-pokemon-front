@@ -1,0 +1,133 @@
+/* Conteneur boosters */
+.boosters-container {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Booster */
+.booster-btn {
+  position: relative;
+  width: 150px;
+  height: 180px;
+  border-radius: 12px;
+  border: 3px solid #fff;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 15px;
+}
+
+/* Hover effet */
+.booster-btn:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.6);
+}
+
+/* Couleurs par type */
+.booster-btn.eau { background: linear-gradient(to bottom, #5cb6ff, #0066cc); }
+.booster-btn.feu { background: linear-gradient(to bottom, #ff4d4d, #b30000); }
+.booster-btn.electrik { background: linear-gradient(to bottom, #ffd633, #ff9900); }
+.booster-btn.plante { background: linear-gradient(to bottom, #44d944, #007700); }
+.booster-btn.vol { background: linear-gradient(to bottom, #b3b3ff, #4d4d99); }
+
+/* Lumière TCG */
+.booster-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease-in-out;
+}
+
+/* Pokémon cards container */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+/* Pokémon card Style TCG */
+.pokemon-card {
+  width: 130px;
+  height: 185px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.5);
+  position: relative;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  /* Animation en entrée */
+  transform: scale(0) rotateY(90deg);
+  animation: popCard 0.4s forwards ease-out;
+}
+
+@keyframes popCard {
+  0% { transform: scale(0) rotateY(100deg); opacity: 0; }
+  60% { transform: scale(1.1) rotateY(5deg); opacity: 1; }
+  100% { transform: scale(1) rotateY(0deg); }
+}
+
+/* Image Pokémon */
+.pokemon-image img {
+  width: 90%;
+  height: 80px;
+  object-fit: contain;
+}
+
+/* Infos texte */
+.pokemon-info h3 {
+  margin: 3px 0 0 0;
+  font-size: 14px;
+  color: #222;
+}
+
+.pokemon-info p {
+  margin: 1px 0;
+  font-size: 11px;
+  color: #444;
+}
+
+.rarete {
+  font-weight: bold;
+  color: #d48a00;
+}
+
+/* Bouton supprimer */
+.delete-btn {
+  width: 70%;
+  margin: 3px auto;
+  background: #ff4444;
+  border: none;
+  color: white;
+  padding: 3px 6px;
+  font-size: 11px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #b30000;
+}
