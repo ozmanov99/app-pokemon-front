@@ -6,14 +6,16 @@ import { DresseurListComponent } from './components/dresseur-list/dresseur-list.
 import { DresseurFormComponent } from './components/dresseur-form/dresseur-form.component';
 import { EchangeListComponent } from './components/echange-list/echange-list.component';
 import { MaCollectionComponent } from './components/ma-collection/ma-collection.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'pokemons', component: PokemonListComponent },
   { path: 'dresseurs', component: DresseurListComponent },
   { path: 'dresseur/form/:id', component: DresseurFormComponent },
   { path: 'echanges', component: EchangeListComponent },
-  { path: 'collection', component: MaCollectionComponent }, // <-- ajout ici
+  { path: 'collection', component: MaCollectionComponent },
   { path: '**', redirectTo: '' }
 ];
 

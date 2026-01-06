@@ -20,4 +20,9 @@ export class CollectionService {
   supprimerCarte(id: number): void {
     this.collection = this.collection.filter((p) => p.id !== id);
   }
+
+   // Sauvegarder la collection dans localStorage
+  private save(): void {
+    localStorage.setItem('maCollection', JSON.stringify(this.collection));
+  }
 }

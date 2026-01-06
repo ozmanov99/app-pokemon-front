@@ -9,7 +9,8 @@ import { Dresseur } from '../models/dresseur.model';
 export class DresseurService {
   private apiUrl = 'http://localhost:8080/api/dresseurs';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    }
 
   getAll(): Observable<Dresseur[]> {
     return this.http.get<Dresseur[]>(this.apiUrl);

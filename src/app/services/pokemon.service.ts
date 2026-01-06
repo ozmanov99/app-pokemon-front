@@ -8,24 +8,25 @@ import { Booster } from '../models/booster.model';
   providedIn: 'root'
 })
 export class PokemonService {
-  private apiUrl = 'http://localhost:8080/api/pokemons';
+  private pokemonUrl = 'http://localhost:8080/api/pokemons';
   private boosterUrl = 'http://localhost:8080/api/boosters';
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Pokemon[]> {
-    return this.http.get<Pokemon[]>(this.apiUrl);
+  // Récupérer les Pokémon du dresseur connecté
+  getMyPokemons(): Observable<Pokemon[]> {
+    return this.http.get<Pokemon[]>(this.pokemonUrl);
   }
 
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  // Ouvrir un booster
+  openBooster(): Observable<Pokemon[]> {
+    return this.http.post<Booster>(`${this.boosterUrl}/ouvrir`, {})
+      .pipe(map(b => b.cartes));
   }
 
-  // Ouvrir un booster et récupérer uniquement les Pokémon
-  openBooster(dresseurId: number): Observable<Pokemon[]> {
-    return this.http.post<Booster>(`${this.boosterUrl}/ouvrir/${dresseurId}`, {})
-      .pipe(
-        map((booster: Booster) => booster.cartes)
-      );
+  // Ouvrir un booster par type
+  openBoosterByType(type: string): Observable<Pokemon[]> {
+    return this.http.post<Booster>(`${this.boosterUrl}/ouvrir/type/${type}`, {})
+      .pipe(map(b => b.cartes));
   }
 }

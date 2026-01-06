@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router'; // <-- ajouté
+import { RouterModule } from '@angular/router';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,7 +15,8 @@ import { PokemonListComponent } from './components/pokemon-list/pokemon-list.com
 import { DresseurListComponent } from './components/dresseur-list/dresseur-list.component';
 import { DresseurFormComponent } from './components/dresseur-form/dresseur-form.component';
 import { EchangeListComponent } from './components/echange-list/echange-list.component';
-import { MaCollectionComponent } from './components/ma-collection/ma-collection.component'; // <-- corrigé
+import { MaCollectionComponent } from './components/ma-collection/ma-collection.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,7 @@ import { MaCollectionComponent } from './components/ma-collection/ma-collection.
     DresseurFormComponent,
     EchangeListComponent,
     MaCollectionComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +36,10 @@ import { MaCollectionComponent } from './components/ma-collection/ma-collection.
     HttpClientModule,
     RouterModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    ],
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

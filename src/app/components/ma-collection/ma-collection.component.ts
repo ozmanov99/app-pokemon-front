@@ -11,7 +11,8 @@ import { Pokemon } from '../../models/pokemon.model';
 export class MaCollectionComponent implements OnInit {
   maCollection: Pokemon[] = [];
 
-  constructor(private collectionService: CollectionService) {}
+  constructor(private collectionService: CollectionService) {
+    }
 
   ngOnInit(): void {
     this.maCollection = this.collectionService.getCollection();

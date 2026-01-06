@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { BoosterService } from '../../services/booster.service';
-import { CollectionService } from '../../services/collection.service';
+import { PokemonService } from '../../services/pokemon.service';
+import { AuthService } from '../../services/auth.service';
 import { Pokemon } from '../../models/pokemon.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -11,7 +12,6 @@ import { Pokemon } from '../../models/pokemon.model';
 })
 export class PokemonListComponent implements OnInit {
   pokemons: Pokemon[] = [];
-  dresseurId = 3;
 
   @ViewChild('lightEau') lightEau!: ElementRef;
   @ViewChild('lightFeu') lightFeu!: ElementRef;
@@ -20,15 +20,31 @@ export class PokemonListComponent implements OnInit {
   @ViewChild('lightVol') lightVol!: ElementRef;
 
   constructor(
-    private boosterService: BoosterService,
-    private collectionService: CollectionService
+    private pokemonService: PokemonService,
+    public authService: AuthService,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    this.loadPokemons();
+  }
+
+  loadPokemons(): void {
+    this.pokemonService.getMyPokemons().subscribe({
+      next: pokemons => this.pokemons = pokemons,
+      error: err => console.error('Erreur chargement Pokémon', err)
+    });
+  }
 
   ouvrirBooster(type: string): void {
-    let light: ElementRef;
-    switch(type) {
+    let light!: ElementRef;
+
+    switch (type) {
       case 'Eau': light = this.lightEau; break;
       case 'Feu': light = this.lightFeu; break;
       case 'Électrik': light = this.lightElec; break;
@@ -37,20 +53,23 @@ export class PokemonListComponent implements OnInit {
       default: return;
     }
 
+    // Animation lumière du booster
     light.nativeElement.querySelector('.booster-light').style.opacity = '1';
-    setTimeout(() => light.nativeElement.querySelector('.booster-light').style.opacity = '0', 300);
+    setTimeout(() =>
+      light.nativeElement.querySelector('.booster-light').style.opacity = '0',
+      300
+    );
 
-    this.boosterService.ouvrirParType(this.dresseurId, type).subscribe({
-      next: (nouveauxPokemons: Pokemon[]) => {
-        this.pokemons = [];
-        nouveauxPokemons.forEach((p, index) => {
-          setTimeout(() => {
-            this.pokemons.push(p);
-            this.collectionService.ajouterCartes([p]);
-          }, index * 400);
-        });
-      },
-      error: (err) => console.error('Erreur ouverture booster', err)
+    // Ouvrir booster et ajouter les Pokémon
+    this.pokemonService.openBoosterByType(type).subscribe({
+      next: nouveaux => this.pokemons.push(...nouveaux),
+      error: err => console.error('Erreur ouverture booster', err)
     });
+  }
+
+  logout(): void {
+    this.authService.logout();                // supprime le token
+    localStorage.removeItem('dresseurId');    // supprime l'ID
+    this.router.navigate(['/login']);         // redirige vers login
   }
 }
