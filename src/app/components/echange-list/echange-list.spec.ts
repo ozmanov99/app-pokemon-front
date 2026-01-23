@@ -1,23 +1,34 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EchangeListComponent } from './echange-list.component';
+import { EchangeService } from '../../services/echange.service';
+import { of } from 'rxjs';
 
-import { EchangeList } from './echange-list';
-
-describe('EchangeList', () => {
-  let component: EchangeList;
-  let fixture: ComponentFixture<EchangeList>;
+describe('EchangeListComponent', () => {
+  let component: EchangeListComponent;
+  let fixture: ComponentFixture<EchangeListComponent>;
+  let echangeServiceSpy: jasmine.SpyObj<EchangeService>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [EchangeList]
-    })
-    .compileComponents();
+    echangeServiceSpy = jasmine.createSpyObj('EchangeService', ['getAll', 'accepter', 'refuser']);
 
-    fixture = TestBed.createComponent(EchangeList);
+    await TestBed.configureTestingModule({
+      declarations: [EchangeListComponent],
+      providers: [
+        { provide: EchangeService, useValue: echangeServiceSpy }
+      ]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(EchangeListComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('doit créer le composant', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('doit charger les échanges', () => {
+    echangeServiceSpy.getAll.and.returnValue(of([]));
+    component.loadEchanges();
+    expect(echangeServiceSpy.getAll).toHaveBeenCalled();
   });
 });

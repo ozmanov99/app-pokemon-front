@@ -1,16 +1,15 @@
 import { TestBed } from '@angular/core/testing';
+import { CollectionService } from './collection.service';
 
-import { Collection } from './collection';
-
-describe('Collection', () => {
-  let service: Collection;
+describe('CollectionService', () => {
+  let service: CollectionService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(Collection);
+    service = TestBed.inject(CollectionService);
   });
 
-  it('should be created', () => {
+  it('doit être créé', () => {
     expect(service).toBeTruthy();
   });
 });

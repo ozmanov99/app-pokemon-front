@@ -72,4 +72,13 @@ export class PokemonListComponent implements OnInit {
     localStorage.removeItem('dresseurId');    // supprime l'ID
     this.router.navigate(['/login']);         // redirige vers login
   }
+
+ deletePokemon(id: number): void {
+   this.pokemonService.deletePokemon(id).subscribe({
+     next: () => {
+       this.pokemons = this.pokemons.filter(p => p.id !== id);
+     },
+     error: err => console.error('Erreur suppression Pokémon', err)
+   });
+ }
 }

@@ -1,23 +1,34 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DresseurListComponent } from './dresseur-list.component';
+import { DresseurService } from '../../services/dresseur.service';
+import { of } from 'rxjs';
 
-import { DresseurList } from './dresseur-list';
-
-describe('DresseurList', () => {
-  let component: DresseurList;
-  let fixture: ComponentFixture<DresseurList>;
+describe('DresseurListComponent', () => {
+  let component: DresseurListComponent;
+  let fixture: ComponentFixture<DresseurListComponent>;
+  let dresseurServiceSpy: jasmine.SpyObj<DresseurService>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [DresseurList]
-    })
-    .compileComponents();
+    dresseurServiceSpy = jasmine.createSpyObj('DresseurService', ['getAll', 'delete']);
 
-    fixture = TestBed.createComponent(DresseurList);
+    await TestBed.configureTestingModule({
+      declarations: [DresseurListComponent],
+      providers: [
+        { provide: DresseurService, useValue: dresseurServiceSpy }
+      ]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(DresseurListComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('doit créer le composant', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('doit charger les dresseurs', () => {
+    dresseurServiceSpy.getAll.and.returnValue(of([]));
+    component.loadDresseurs();
+    expect(dresseurServiceSpy.getAll).toHaveBeenCalled();
   });
 });

@@ -8,7 +8,6 @@ export class JwtInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const token = this.auth.getToken();
-
     if (token) {
       const cloned = req.clone({
         setHeaders: {

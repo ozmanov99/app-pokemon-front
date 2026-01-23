@@ -1,23 +1,30 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DresseurFormComponent } from './dresseur-form.component';
+import { DresseurService } from '../../services/dresseur.service';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
-import { DresseurForm } from './dresseur-form';
-
-describe('DresseurForm', () => {
-  let component: DresseurForm;
-  let fixture: ComponentFixture<DresseurForm>;
+describe('DresseurFormComponent', () => {
+  let component: DresseurFormComponent;
+  let fixture: ComponentFixture<DresseurFormComponent>;
+  let dresseurServiceSpy: jasmine.SpyObj<DresseurService>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [DresseurForm]
-    })
-    .compileComponents();
+    dresseurServiceSpy = jasmine.createSpyObj('DresseurService', ['get', 'create', 'update']);
 
-    fixture = TestBed.createComponent(DresseurForm);
+    await TestBed.configureTestingModule({
+      declarations: [DresseurFormComponent],
+      providers: [
+        { provide: DresseurService, useValue: dresseurServiceSpy },
+        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: { get: () => '0' } } } }
+      ]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(DresseurFormComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('doit créer le composant', () => {
     expect(component).toBeTruthy();
   });
 });

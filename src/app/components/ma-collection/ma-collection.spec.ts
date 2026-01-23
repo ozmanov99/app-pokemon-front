@@ -1,23 +1,33 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MaCollectionComponent } from './ma-collection.component';
+import { CollectionService } from '../../services/collection.service';
 
-import { MaCollection } from './ma-collection';
-
-describe('MaCollection', () => {
-  let component: MaCollection;
-  let fixture: ComponentFixture<MaCollection>;
+describe('MaCollectionComponent', () => {
+  let component: MaCollectionComponent;
+  let fixture: ComponentFixture<MaCollectionComponent>;
+  let collectionServiceSpy: jasmine.SpyObj<CollectionService>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [MaCollection]
-    })
-    .compileComponents();
+    collectionServiceSpy = jasmine.createSpyObj('CollectionService', ['getCollection', 'supprimerCarte']);
+    collectionServiceSpy.getCollection.and.returnValue([]);
 
-    fixture = TestBed.createComponent(MaCollection);
+    await TestBed.configureTestingModule({
+      declarations: [MaCollectionComponent],
+      providers: [
+        { provide: CollectionService, useValue: collectionServiceSpy }
+      ]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(MaCollectionComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('doit créer le composant', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('doit charger la collection', () => {
+    component.ngOnInit();
+    expect(collectionServiceSpy.getCollection).toHaveBeenCalled();
   });
 });

@@ -29,4 +29,10 @@ export class PokemonService {
     return this.http.post<Booster>(`${this.boosterUrl}/ouvrir/type/${type}`, {})
       .pipe(map(b => b.cartes));
   }
+
+  // Supprimer un Pokémon
+  deletePokemon(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.pokemonUrl}/${id}`);
+  }
+
 }

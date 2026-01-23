@@ -1,29 +1,32 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
-import { App } from './app';
+import { AppComponent } from './app.component';
 
-describe('App', () => {
+describe('AppComponent', () => {
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterModule.forRoot([])
       ],
       declarations: [
-        App
+        AppComponent
       ],
     }).compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
+  // Test pour vérifier que le composant AppComponent est créé correctement
+  it('doit créer le composant AppComponent', () => {
+    const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(app).toBeTruthy(); // Vérifie que le composant existe
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(App);
-    fixture.detectChanges();
+  // Test pour vérifier que le titre affiché correspond bien à "PokéApp"
+  it('doit afficher le titre correct', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges(); // Déclenche le cycle de détection des changements
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, app-pokemon-front');
+    expect(compiled.querySelector('h1')?.textContent).toContain('PokéApp'); // Vérifie le contenu du h1
   });
 });

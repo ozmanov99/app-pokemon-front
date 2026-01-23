@@ -40,6 +40,9 @@
       <p>Type : {{ p.type }}</p>
       <p>Niveau : {{ p.niveau }}</p>
       <p class="rarete">Rareté : {{ p.rarete }}</p>
+      <button class="delete-btn" (click)="deletePokemon(p.id)">
+        Supprimer
+      </button>
     </div>
   </div>
 </div>
