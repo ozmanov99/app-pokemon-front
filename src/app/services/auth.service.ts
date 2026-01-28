@@ -9,8 +9,7 @@ export class AuthService {
   private apiUrl = 'http://localhost:8080/api/auth';
   private tokenKey = 'jwt_token';
 
-  constructor(private http: HttpClient) {
-    }
+  constructor(private http: HttpClient) {}
 
   login(username: string, password: string): Observable<string> {
     return this.http
@@ -32,6 +31,18 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    const token = this.getToken();
+    if (!token) return false;
+
+    try {
+      // Décoder le payload du JWT
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const exp = payload.exp; // exp en secondes
+      const now = Math.floor(Date.now() / 1000);
+      return exp > now;
+    } catch (e) {
+      // Si le token est invalide
+      return false;
+    }
   }
 }

@@ -26,11 +26,6 @@ export class PokemonListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/login']);
-      return;
-    }
-
     this.loadPokemons();
   }
 
@@ -67,11 +62,12 @@ export class PokemonListComponent implements OnInit {
     });
   }
 
-  logout(): void {
-    this.authService.logout();                // supprime le token
-    localStorage.removeItem('dresseurId');    // supprime l'ID
-    this.router.navigate(['/login']);         // redirige vers login
-  }
+logout(): void {
+  this.authService.logout();
+  localStorage.removeItem('dresseurId');
+  this.router.navigate(['/login']);
+}
+
 
  deletePokemon(id: number): void {
    this.pokemonService.deletePokemon(id).subscribe({

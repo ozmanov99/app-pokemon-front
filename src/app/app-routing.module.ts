@@ -8,14 +8,16 @@ import { EchangeListComponent } from './components/echange-list/echange-list.com
 import { MaCollectionComponent } from './components/ma-collection/ma-collection.component';
 import { LoginComponent } from './components/login/login.component';
 
+import { AuthGuard } from './guards/auth.guard';
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'pokemons', component: PokemonListComponent },
-  { path: 'dresseurs', component: DresseurListComponent },
-  { path: 'dresseur/form/:id', component: DresseurFormComponent },
-  { path: 'echanges', component: EchangeListComponent },
-  { path: 'collection', component: MaCollectionComponent },
+  { path: 'pokemons', component: PokemonListComponent, canActivate: [AuthGuard] },
+  { path: 'dresseurs', component: DresseurListComponent, canActivate: [AuthGuard] },
+  { path: 'dresseur/form/:id', component: DresseurFormComponent, canActivate: [AuthGuard] },
+  { path: 'echanges', component: EchangeListComponent, canActivate: [AuthGuard] },
+  { path: 'collection', component: MaCollectionComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];
 
