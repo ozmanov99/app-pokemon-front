@@ -1,8 +1,18 @@
 <h2>Mon Profil Dresseur</h2>
 
 <div *ngIf="dresseur" class="profil-card">
-  <p><strong>Nom :</strong> {{ dresseur.nom }}</p>
-  <p><strong>Pseudo :</strong> {{ dresseur.pseudo }}</p>
-  <p><strong>Niveau :</strong> {{ dresseur.niveau }}</p>
-  <p><strong>Rôle :</strong> {{ dresseur.role }}</p>
+
+  <img
+    [src]="dresseur.photoUrl"
+    alt="Photo du dresseur"
+    class="profil-avatar"
+  />
+
+  <div class="profil-infos">
+    <p><strong>Nom :</strong> {{ dresseur.nom }}</p>
+    <p><strong>Pseudo :</strong> {{ dresseur.pseudo }}</p>
+    <p><strong>Niveau :</strong> {{ dresseur.niveau }}</p>
+    <p><strong>Rôle :</strong> {{ dresseur.role }}</p>
+  </div>
+
 </div>

@@ -5,7 +5,7 @@ export class Dresseur {
   id: number;
   nom: string;
   pseudo: string;
-  avatar: string;
+  photoUrl: string;
   niveau: number;
   role: string;         // 'dresseur' ou 'admin'
   username?: string;
@@ -17,7 +17,7 @@ export class Dresseur {
     id: number,
     nom: string,
     pseudo: string,
-    avatar: string,
+    photoUrl: string,
     niveau: number,
     role: string,
     username?: string,
@@ -28,7 +28,7 @@ export class Dresseur {
     this.id = id;
     this.nom = nom;
     this.pseudo = pseudo;
-    this.avatar = avatar;
+    this.photoUrl = photoUrl;
     this.niveau = niveau;
     this.role = role;
     this.username = username;
