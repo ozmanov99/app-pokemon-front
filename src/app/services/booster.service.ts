@@ -13,12 +13,6 @@ export class BoosterService {
   constructor(private http: HttpClient) {
     }
 
-  // Ouvrir un booster générique pour un dresseur
-  // ouvrir(dresseurId: number): Observable<Pokemon[]> {
-    //return this.http.post<Booster>(`${this.apiUrl}/ouvrir/${dresseurId}`, {})
-      //.pipe(map((booster: Booster) => booster.cartes));
-  //}
-
   // Ouvrir un booster par type (Eau, Feu, Électrik, etc.)
   ouvrirParType(dresseurId: number, type: string): Observable<Pokemon[]> {
     return this.http.post<Booster>(`${this.apiUrl}/ouvrir/${dresseurId}/${type}`, {

@@ -1,8 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { Pokemon } from '../models/pokemon.model';
 import { Booster } from '../models/booster.model';
+
+export interface PaginatedResponse {
+  content: Pokemon[];
+  totalPages: number;
+  totalElements: number;
+  page: number;
+  size: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +21,12 @@ export class PokemonService {
 
   constructor(private http: HttpClient) {}
 
-  // Récupérer les Pokémon du dresseur connecté
-  getMyPokemons(): Observable<Pokemon[]> {
-    return this.http.get<Pokemon[]>(this.pokemonUrl);
+  // Pagination pour Pokémon du dresseur
+  getMyPokemons(page: number = 0, size: number = 20): Observable<PaginatedResponse> {
+    const params = new HttpParams()
+      .set('page', page)
+      .set('size', size);
+    return this.http.get<PaginatedResponse>(this.pokemonUrl, { params });
   }
 
   // Ouvrir un booster
@@ -24,15 +35,12 @@ export class PokemonService {
       .pipe(map(b => b.cartes));
   }
 
-  // Ouvrir un booster par type
   openBoosterByType(type: string): Observable<Pokemon[]> {
     return this.http.post<Booster>(`${this.boosterUrl}/ouvrir/type/${type}`, {})
       .pipe(map(b => b.cartes));
   }
 
-  // Supprimer un Pokémon
   deletePokemon(id: number): Observable<void> {
     return this.http.delete<void>(`${this.pokemonUrl}/${id}`);
   }
-
 }
