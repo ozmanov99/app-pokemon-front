@@ -13,7 +13,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PokemonListComponent } from './components/pokemon-list/pokemon-list.component';
 import { DresseurListComponent } from './components/dresseur-list/dresseur-list.component';
-import { DresseurFormComponent } from './components/dresseur-form/dresseur-form.component';
 import { EchangeListComponent } from './components/echange-list/echange-list.component';
 import { MaCollectionComponent } from './components/ma-collection/ma-collection.component';
 import { LoginComponent } from './components/login/login.component';
@@ -24,7 +23,6 @@ import { LoginComponent } from './components/login/login.component';
     HomeComponent,
     PokemonListComponent,
     DresseurListComponent,
-    DresseurFormComponent,
     EchangeListComponent,
     MaCollectionComponent,
     LoginComponent,

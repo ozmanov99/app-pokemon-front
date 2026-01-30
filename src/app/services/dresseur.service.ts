@@ -12,23 +12,7 @@ export class DresseurService {
   constructor(private http: HttpClient) {
     }
 
-  getAll(): Observable<Dresseur[]> {
-    return this.http.get<Dresseur[]>(this.apiUrl);
-  }
-
-  get(id: number): Observable<Dresseur> {
-    return this.http.get<Dresseur>(`${this.apiUrl}/${id}`);
-  }
-
-  create(dresseur: Dresseur): Observable<Dresseur> {
-    return this.http.post<Dresseur>(this.apiUrl, dresseur);
-  }
-
-  update(id: number, dresseur: Dresseur): Observable<Dresseur> {
-    return this.http.put<Dresseur>(`${this.apiUrl}/${id}`, dresseur);
-  }
-
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  getMyProfile(): Observable<Dresseur> {
+    return this.http.get<Dresseur>(`${this.apiUrl}/me`);
   }
 }

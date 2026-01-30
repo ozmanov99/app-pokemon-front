@@ -4,27 +4,20 @@ import { Dresseur } from '../../models/dresseur.model';
 
 @Component({
   selector: 'app-dresseur-list',
-  standalone: false,
   templateUrl: './dresseur-list.component.html',
-  styleUrls: ['./dresseur-list.component.css']
+  styleUrls: ['./dresseur-list.component.css'],
+  standalone: false,
 })
 export class DresseurListComponent implements OnInit {
-  dresseurs: Dresseur[] = [];
+
+  dresseur!: Dresseur;
 
   constructor(private dresseurService: DresseurService) {}
 
   ngOnInit(): void {
-    this.loadDresseurs();
-  }
-
-  loadDresseurs(): void {
-    this.dresseurService.getAll().subscribe({
-      next: (data) => (this.dresseurs = data),
-      error: (err) => console.error('Erreur chargement dresseurs', err),
+    this.dresseurService.getMyProfile().subscribe({
+      next: (data) => this.dresseur = data,
+      error: (err) => console.error('Erreur chargement profil', err),
     });
-  }
-
-  supprimer(id: number): void {
-    this.dresseurService.delete(id).subscribe(() => this.loadDresseurs());
   }
 }
