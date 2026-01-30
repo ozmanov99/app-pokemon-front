@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
-  standalone: false,
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  standalone: false
 })
-export class HomeComponent { }
-
-
+export class HomeComponent {
+  constructor(public authService: AuthService) {}
+}
