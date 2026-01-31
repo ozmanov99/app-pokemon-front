@@ -1,11 +1,11 @@
 <div class="header-collection">
-  <h2>Pokémons & Boosters</h2>
+  <h2>Boosters</h2>
   <button *ngIf="authService.isLoggedIn()" (click)="logout()" class="logout-btn">
     Déconnexion
   </button>
 </div>
 
-<!-- Section Boosters (inchangée) -->
+<!-- Section Boosters -->
 <div class="boosters-container">
   <div class="booster-btn eau" (click)="ouvrirBooster('Eau')" #lightEau>
     Eau
@@ -27,28 +27,4 @@
     Vol
     <div class="booster-light"></div>
   </div>
-</div>
-
-<!-- Section Pokémon -->
-<div class="card-container">
-  <div class="pokemon-card" *ngFor="let p of pokemons; let i = index" [style.animationDelay]="i * 0.2 + 's'" class="fade-in-card">
-    <div class="pokemon-image">
-      <img [src]="p.imageUrl || 'assets/default-pokemon.png'" alt="{{ p.nom }}">
-    </div>
-    <div class="pokemon-info">
-      <h3>{{ p.nom }}</h3>
-      <p>Type : {{ p.type }}</p>
-      <p>Niveau : {{ p.niveau }}</p>
-      <p class="rarete">Rareté : {{ p.rarete }}</p>
-      <button class="delete-btn" (click)="deletePokemon(p.id)">
-        Supprimer
-      </button>
-    </div>
-  </div>
-</div>
-
-<div class="pagination">
-  <button (click)="prevPage()" [disabled]="currentPage === 1">Précédent</button>
-  <span>Page {{ currentPage }} / {{ totalPages }}</span>
-  <button (click)="nextPage()" [disabled]="currentPage === totalPages">Suivant</button>
 </div>

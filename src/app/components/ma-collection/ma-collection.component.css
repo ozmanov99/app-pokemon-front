@@ -1,56 +1,222 @@
-h2 {
-  margin-bottom: 15px;
-  font-size: 1.5em;
-  text-align: center;
+/* Conteneur boosters */
+.boosters-container {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-/* Container des cartes */
-.cartes {
+/* Booster */
+.booster-btn {
+  position: relative;
+  width: 150px;
+  height: 180px;
+  border-radius: 12px;
+  border: 3px solid #fff;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 15px;
+}
+
+/* Hover effet */
+.booster-btn:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.6);
+}
+
+/* Couleurs par type */
+.booster-btn.eau { background: linear-gradient(to bottom, #5cb6ff, #0066cc); }
+.booster-btn.feu { background: linear-gradient(to bottom, #ff4d4d, #b30000); }
+.booster-btn.electrik { background: linear-gradient(to bottom, #ffd633, #ff9900); }
+.booster-btn.plante { background: linear-gradient(to bottom, #44d944, #007700); }
+.booster-btn.vol { background: linear-gradient(to bottom, #b3b3ff, #4d4d99); }
+
+/* Lumière TCG */
+.booster-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease-in-out;
+}
+
+/* Pokémon cards container */
+.card-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+/* Pokémon card Style TCG */
+.pokemon-card {
+  width: 140px;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f8f8f8;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  position: relative;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px solid #ccc;
+  background-clip: padding-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* Animation en entrée */
+  transform: scale(0) rotateY(90deg);
+  animation: popCard 0.4s forwards ease-out;
+}
+
+/* Hover effet carte */
+.pokemon-card:hover {
+  transform: scale(1.05) rotateY(0deg);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.6);
+}
+
+/* Animation pop */
+@keyframes popCard {
+  0% { transform: scale(0) rotateY(100deg); opacity: 0; }
+  60% { transform: scale(1.1) rotateY(5deg); opacity: 1; }
+  100% { transform: scale(1) rotateY(0deg); }
+}
+
+/* Image Pokémon */
+.pokemon-image {
+  width: 100%;
+  height: 100px;
+  background: #fff;
+  border-bottom: 2px solid #ccc;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-/* Carte individuelle identique à l'affichage booster */
-.carte {
-  width: 150px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  overflow: hidden;
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
+.pokemon-image img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
 }
 
-.carte:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+/* Infos texte */
+.pokemon-info {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
-/* Image de la carte */
-.carte img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-bottom: 1px solid #ddd;
-  border-radius: 10px 10px 0 0;
+.pokemon-info h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #222;
 }
 
-/* Info du Pokémon */
-.carte div {
-  padding: 8px 5px;
-  font-size: 0.9em;
+.pokemon-info p {
+  margin: 0;
+  font-size: 11px;
+  color: #444;
+}
+
+.rarete {
+  font-weight: bold;
+  color: #d48a00;
+}
+
+/* Bouton supprimer */
+.delete-btn {
+  width: 80%;
+  margin: 5px auto;
+  background: #ff4444;
+  border: none;
+  color: white;
+  padding: 4px 6px;
+  font-size: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.delete-btn:hover {
+  background: #b30000;
+}
+
+/* Bouton déconnexion */
+.logout-btn {
+  padding: 6px 12px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #b30000;
+}
+
+/* Header collection */
+.header-collection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+/* Pagination container */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Page info text */
+.pagination span {
   font-weight: bold;
   color: #333;
 }
 
-/* Animation pour l'ajout de carte */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Pagination buttons */
+.pagination button {
+  padding: 8px 16px;
+  background-color: #4CAF50; /* vert */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
 }
 
-.carte.ng-animate {
-  animation: fadeIn 0.4s ease forwards;
+.pagination button:hover:not(:disabled) {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
 }

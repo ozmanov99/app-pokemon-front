@@ -1,9 +1,15 @@
 <h2>Liste des Échanges</h2>
+
 <div *ngIf="echanges.length === 0">Aucun échange trouvé.</div>
+
 <ul>
   <li *ngFor="let e of echanges">
     {{ e.dresseur1.pseudo }} ↔ {{ e.dresseur2.pseudo }} - Statut: {{ e.statut }}
-    <button (click)="accepter(e.id)">Accepter</button>
-    <button (click)="refuser(e.id)">Refuser</button>
+
+    <!-- Affiche les boutons uniquement si le dresseur connecté est concerné -->
+    <span *ngIf="e.dresseur1.id === dresseurConnecte.id || e.dresseur2.id === dresseurConnecte.id">
+      <button (click)="accepter(e.id)">Accepter</button>
+      <button (click)="refuser(e.id)">Refuser</button>
+    </span>
   </li>
 </ul>

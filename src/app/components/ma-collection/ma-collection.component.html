@@ -1,10 +1,32 @@
-<h2>Ma Collection</h2>
-<div *ngIf="maCollection.length === 0">Collection est vide.</div>
+<div class="header-collection">
+  <h2>Ma Collection</h2>
+  <button *ngIf="authService.isLoggedIn()" (click)="logout()" class="logout-btn">
+    Déconnexion
+  </button>
+</div>
 
-<div class="cartes">
-  <div *ngFor="let pokemon of maCollection" class="carte">
-    <img [src]="pokemon.imageUrl || 'assets/default-pokemon.png'" alt="{{pokemon.nom}}">
-    <div>{{pokemon.nom}} ({{pokemon.type}})</div>
-    <button class="delete-btn" (click)="supprimer(pokemon.id)">Supprimer</button>
+<div *ngIf="allPokemons.length === 0">Collection est vide.</div>
+
+<!-- Section Pokémon -->
+<div class="card-container">
+  <div class="pokemon-card" *ngFor="let p of pokemons; let i = index" [style.animationDelay]="i * 0.2 + 's'" class="fade-in-card">
+    <div class="pokemon-image">
+      <img [src]="p.imageUrl || 'assets/default-pokemon.png'" alt="{{ p.nom }}">
+    </div>
+    <div class="pokemon-info">
+      <h3>{{ p.nom }}</h3>
+      <p>Type : {{ p.type }}</p>
+      <p>Niveau : {{ p.niveau }}</p>
+      <p class="rarete">Rareté : {{ p.rarete }}</p>
+      <button class="delete-btn" (click)="deletePokemon(p.id)">
+        Supprimer
+      </button>
+    </div>
   </div>
+</div>
+
+<div class="pagination" *ngIf="totalPages > 1">
+  <button (click)="prevPage()" [disabled]="currentPage === 1">Précédent</button>
+  <span>Page {{ currentPage }} / {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">Suivant</button>
 </div>
