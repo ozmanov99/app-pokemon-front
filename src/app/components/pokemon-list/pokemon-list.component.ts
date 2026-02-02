@@ -11,7 +11,8 @@ import { Pokemon } from '../../models/pokemon.model';
   standalone: false
 })
 export class PokemonListComponent {
-  allPokemons: Pokemon[] = [];
+  allPokemons: Pokemon[] = []; // tableau interne, peut rester vide
+  nouveauxPokemons: Pokemon[] = []; // pour l'aperçu temporaire
 
   @ViewChild('lightEau') lightEau!: ElementRef;
   @ViewChild('lightFeu') lightFeu!: ElementRef;
@@ -44,10 +45,15 @@ export class PokemonListComponent {
       300
     );
 
-    // Ouvrir booster et ajouter les Pokémon
+    // Ouvrir booster et montrer le Pokémon gagné temporairement
     this.pokemonService.openBoosterByType(type).subscribe({
       next: nouveaux => {
-        this.allPokemons.push(...nouveaux);
+        this.nouveauxPokemons = nouveaux; // afficher temporairement
+
+        // Après 5 secondes, faire disparaître l’aperçu
+        setTimeout(() => {
+          this.nouveauxPokemons = [];
+        }, 5000); // 5000ms = 5 secondes
       },
       error: err => console.error('Erreur ouverture booster', err)
     });

@@ -1,5 +1,5 @@
 <div class="header-collection">
-  <h2>Boosters</h2>
+  <h2 class="header-title">Pokémons & Boosters</h2>
   <button *ngIf="authService.isLoggedIn()" (click)="logout()" class="logout-btn">
     Déconnexion
   </button>
@@ -26,5 +26,23 @@
   <div class="booster-btn vol" (click)="ouvrirBooster('Vol')" #lightVol>
     Vol
     <div class="booster-light"></div>
+  </div>
+</div>
+
+<!-- Aperçu temporaire du Pokémon gagné -->
+<div class="nouveaux-pokemons" *ngIf="nouveauxPokemons.length > 0">
+  <h3 class="preview-title">Tu as gagné :</h3>
+  <div class="card-container">
+    <div class="pokemon-card" *ngFor="let p of nouveauxPokemons; let i = index" [style.animationDelay]="i * 0.2 + 's'" class="fade-in-card">
+      <div class="pokemon-image">
+        <img [src]="p.imageUrl || 'assets/default-pokemon.png'" alt="{{ p.nom }}">
+      </div>
+      <div class="pokemon-info">
+        <h3>{{ p.nom }}</h3>
+        <p>Type : {{ p.type }}</p>
+        <p>Niveau : {{ p.niveau }}</p>
+        <p class="rarete">Rareté : {{ p.rarete }}</p>
+      </div>
+    </div>
   </div>
 </div>

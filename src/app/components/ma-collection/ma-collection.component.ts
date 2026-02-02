@@ -23,20 +23,21 @@ export class MaCollectionComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.loadPokemons();
-  }
+ ngOnInit(): void {
+   this.loadPokemons();
+ }
 
-  loadPokemons(): void {
-    this.pokemonService.getMyPokemons().subscribe({
-      next: res => {
-        this.allPokemons = res.content;
-        this.totalPages = Math.ceil(this.allPokemons.length / this.pageSize);
-        this.updatePage();
-      },
-      error: err => console.error('Erreur chargement Pokémon', err)
-    });
-  }
+ loadPokemons(): void {
+   this.pokemonService.getMyPokemons().subscribe({
+     next: res => {
+       this.allPokemons = res.content; // <-- contient TOUTES les cartes
+       this.totalPages = Math.ceil(this.allPokemons.length / this.pageSize);
+       this.updatePage();
+     },
+     error: err => console.error('Erreur chargement Pokémon', err)
+   });
+ }
+
 
   updatePage(): void {
     const start = (this.currentPage - 1) * this.pageSize;
