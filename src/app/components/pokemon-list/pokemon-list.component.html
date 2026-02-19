@@ -1,48 +1,91 @@
 <div class="header-collection">
   <h2 class="header-title">Pokémons & Boosters</h2>
-  <button *ngIf="authService.isLoggedIn()" (click)="logout()" class="logout-btn">
+
+  <button *ngIf="authService.isLoggedIn()"
+          (click)="logout()"
+          class="logout-btn">
     Déconnexion
   </button>
 </div>
 
 <!-- Section Boosters -->
-<div class="boosters-container">
-  <div class="booster-btn eau" (click)="ouvrirBooster('Eau')" #lightEau>
+<div class="boosters-container" role="group" aria-label="Choix des boosters Pokémon">
+
+  <button class="booster-btn eau"
+          type="button"
+          (click)="ouvrirBooster('Eau')"
+          aria-label="Ouvrir un booster de type Eau"
+          #lightEau>
     Eau
-    <div class="booster-light"></div>
-  </div>
-  <div class="booster-btn feu" (click)="ouvrirBooster('Feu')" #lightFeu>
+    <span class="booster-light" aria-hidden="true"></span>
+  </button>
+
+  <button class="booster-btn feu"
+          type="button"
+          (click)="ouvrirBooster('Feu')"
+          aria-label="Ouvrir un booster de type Feu"
+          #lightFeu>
     Feu
-    <div class="booster-light"></div>
-  </div>
-  <div class="booster-btn electrik" (click)="ouvrirBooster('Électrik')" #lightElec>
+    <span class="booster-light" aria-hidden="true"></span>
+  </button>
+
+  <button class="booster-btn electrik"
+          type="button"
+          (click)="ouvrirBooster('Électrik')"
+          aria-label="Ouvrir un booster de type Électrik"
+          #lightElec>
     Électrik
-    <div class="booster-light"></div>
-  </div>
-  <div class="booster-btn plante" (click)="ouvrirBooster('Plante')" #lightPlante>
+    <span class="booster-light" aria-hidden="true"></span>
+  </button>
+
+  <button class="booster-btn plante"
+          type="button"
+          (click)="ouvrirBooster('Plante')"
+          aria-label="Ouvrir un booster de type Plante"
+          #lightPlante>
     Plante
-    <div class="booster-light"></div>
-  </div>
-  <div class="booster-btn vol" (click)="ouvrirBooster('Vol')" #lightVol>
+    <span class="booster-light" aria-hidden="true"></span>
+  </button>
+
+  <button class="booster-btn vol"
+          type="button"
+          (click)="ouvrirBooster('Vol')"
+          aria-label="Ouvrir un booster de type Vol"
+          #lightVol>
     Vol
-    <div class="booster-light"></div>
-  </div>
+    <span class="booster-light" aria-hidden="true"></span>
+  </button>
+
+</div>
+
+<!-- Annonce pour lecteurs d’écran lors de l’apparition de nouveaux Pokémon -->
+<div aria-live="polite" class="sr-only">
+  <ng-container *ngIf="nouveauxPokemons.length > 0">
+    {{ nouveauxPokemons.length }} nouveau(x) Pokémon ajouté(s) à ta collection.
+  </ng-container>
 </div>
 
 <!-- Aperçu temporaire du Pokémon gagné -->
 <div class="nouveaux-pokemons" *ngIf="nouveauxPokemons.length > 0">
   <h3 class="preview-title">Tu as gagné :</h3>
+
   <div class="card-container">
-    <div class="pokemon-card" *ngFor="let p of nouveauxPokemons; let i = index" [style.animationDelay]="i * 0.2 + 's'" class="fade-in-card">
+    <div class="pokemon-card fade-in-card"
+         *ngFor="let p of nouveauxPokemons; let i = index"
+         [style.animationDelay]="i * 0.2 + 's'">
+
       <div class="pokemon-image">
-        <img [src]="p.imageUrl || 'assets/default-pokemon.png'" alt="{{ p.nom }}">
+        <img [src]="p.imageUrl || 'assets/default-pokemon.png'"
+             [alt]="'Image du Pokémon ' + p.nom">
       </div>
+
       <div class="pokemon-info">
-        <h3>{{ p.nom }}</h3>
+        <h4>{{ p.nom }}</h4>
         <p>Type : {{ p.type }}</p>
         <p>Niveau : {{ p.niveau }}</p>
         <p class="rarete">Rareté : {{ p.rarete }}</p>
       </div>
+
     </div>
   </div>
 </div>

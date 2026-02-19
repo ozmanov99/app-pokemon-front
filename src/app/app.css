@@ -2,11 +2,11 @@ body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   background-color: #f6f8fc;
-  color: #333;
+  color: #1a1a1a; /* contraste clair */
 }
 
 header {
-  background-color: #ef5350;
+  background-color: #d32f2f; /* rouge plus foncé */
   color: white;
   padding: 10px 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -40,10 +40,11 @@ header {
 }
 
 .nav-links a {
-  color: white;
+  color: #ffffff; /* texte sur fond rouge foncé = contraste suffisant */
   text-decoration: none;
   font-weight: 500;
   transition: opacity 0.2s;
+  outline: none;
 }
 
 .nav-links a:hover,
@@ -52,16 +53,24 @@ header {
   text-decoration: underline;
 }
 
+/* focus visible pour navigation clavier */
+.nav-links a:focus {
+  outline: 3px solid #ffeb3b; /* jaune vif pour bien voir le focus */
+  outline-offset: 3px;
+}
+
 main.content {
   padding: 20px;
+  color: #1a1a1a; /* contraste texte / fond clair respecté */
 }
 
 footer {
   text-align: center;
   padding: 15px;
-  background-color: #ef5350;
-  color: white;
+  background-color: #d32f2f; /* rouge foncé pour contraste suffisant */
+  color: #ffffff;
   position: fixed;
   width: 100%;
   bottom: 0;
+  font-size: 16px; /* taille lisible pour RGAA */
 }

@@ -16,6 +16,7 @@ import { DresseurListComponent } from './components/dresseur-list/dresseur-list.
 import { EchangeListComponent } from './components/echange-list/echange-list.component';
 import { MaCollectionComponent } from './components/ma-collection/ma-collection.component';
 import { LoginComponent } from './components/login/login.component';
+import { PokemonMascotComponent } from './shared/pokemon-mascot/pokemon-mascot.component';
 
 @NgModule({
   declarations: [
@@ -26,13 +27,13 @@ import { LoginComponent } from './components/login/login.component';
     EchangeListComponent,
     MaCollectionComponent,
     LoginComponent,
+    PokemonMascotComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    RouterModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }

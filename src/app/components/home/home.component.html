@@ -1,11 +1,12 @@
+
 <div class="home-container" *ngIf="!authService.isLoggedIn(); else connected">
     <h2>Bienvenue sur PokéApp !</h2>
     <p class="intro">
         Découvrez les Pokémons, échangez vos cartes et gérez votre collection.
     </p>
     <div class="visitor-actions">
-        <button routerLink="/login">Se connecter</button>
-        <button routerLink="/register" class="register-btn">S'inscrire</button>
+      <button routerLink="/login" aria-label="Se connecter à PokéApp">Se connecter</button>
+      <button routerLink="/register" aria-label="Créer un compte PokéApp" class="register-btn">S'inscrire</button>
     </div>
 </div>
 

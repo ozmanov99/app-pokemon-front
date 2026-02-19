@@ -3,6 +3,7 @@ import { PokemonService } from '../../services/pokemon.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Pokemon } from '../../models/pokemon.model';
+import { MascotService } from '../../services/mascot.service';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -11,8 +12,8 @@ import { Pokemon } from '../../models/pokemon.model';
   standalone: false
 })
 export class PokemonListComponent {
-  allPokemons: Pokemon[] = []; // tableau interne, peut rester vide
-  nouveauxPokemons: Pokemon[] = []; // pour l'aperçu temporaire
+  allPokemons: Pokemon[] = [];
+  nouveauxPokemons: Pokemon[] = [];
 
   @ViewChild('lightEau') lightEau!: ElementRef;
   @ViewChild('lightFeu') lightFeu!: ElementRef;
@@ -23,12 +24,12 @@ export class PokemonListComponent {
   constructor(
     private pokemonService: PokemonService,
     public authService: AuthService,
-    private router: Router
+    private router: Router,
+    private mascotService: MascotService
   ) {}
 
   ouvrirBooster(type: string): void {
     let light!: ElementRef;
-
     switch (type) {
       case 'Eau': light = this.lightEau; break;
       case 'Feu': light = this.lightFeu; break;
@@ -38,22 +39,18 @@ export class PokemonListComponent {
       default: return;
     }
 
-    // Animation lumière du booster
+    // Lumière du booster
     light.nativeElement.querySelector('.booster-light').style.opacity = '1';
-    setTimeout(() =>
-      light.nativeElement.querySelector('.booster-light').style.opacity = '0',
-      300
-    );
+    setTimeout(() => light.nativeElement.querySelector('.booster-light').style.opacity = '0', 300);
 
-    // Ouvrir booster et montrer le Pokémon gagné temporairement
+    // Déclenche le saut de la mascotte avec type de booster
+    this.mascotService.triggerJump(type);
+
+    // Ouvrir booster et afficher Pokémon
     this.pokemonService.openBoosterByType(type).subscribe({
       next: nouveaux => {
-        this.nouveauxPokemons = nouveaux; // afficher temporairement
-
-        // Après 5 secondes, faire disparaître l’aperçu
-        setTimeout(() => {
-          this.nouveauxPokemons = [];
-        }, 5000); // 5000ms = 5 secondes
+        this.nouveauxPokemons = nouveaux;
+        setTimeout(() => this.nouveauxPokemons = [], 5000);
       },
       error: err => console.error('Erreur ouverture booster', err)
     });

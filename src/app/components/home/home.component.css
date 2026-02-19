@@ -1,3 +1,4 @@
+
 .home-container {
   max-width: 800px;
   margin: 50px auto;
@@ -7,28 +8,58 @@
   background: linear-gradient(135deg, #f5f5f5, #ffe0b2);
   border-radius: 15px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+
+  /* Animation initiale */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s forwards;
+}
+
+/* Animation fadeInUp */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Titre et intro */
+.home-container h2,
+.home-container .intro {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.6s forwards;
 }
 
 .home-container h2 {
   font-size: 32px;
-  color: #f44336;
+  color: #d32f2f; /* rouge foncé pour contraste AAA */
   margin-bottom: 20px;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+  animation-delay: 0.2s;
 }
 
 .home-container .intro {
   font-size: 18px;
   color: #333;
   margin-bottom: 25px;
+  animation-delay: 0.3s;
 }
+
 
 .visitor-actions {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 40px;
   margin-bottom: 30px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.5s forwards;
+  animation-delay: 0.4s;
+  flex-wrap: wrap;
 }
 
+/* Boutons */
 .visitor-actions button {
   padding: 12px 25px;
   font-size: 16px;
@@ -36,18 +67,24 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   background-color: #f44336;
-  color: white;
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
+/* Bouton S'inscrire */
 .visitor-actions .register-btn {
   background-color: #3b4cca;
 }
 
-.visitor-actions button:hover {
+/* Hover et focus */
+.visitor-actions button:hover,
+.visitor-actions button:focus {
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  outline: 3px solid #ffcb05; /* focus clavier */
+  outline-offset: 3px;
 }
 
 .home-image {
@@ -56,4 +93,45 @@
   margin-top: 20px;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.6s forwards;
+  animation-delay: 0.8s;
+}
+
+@media (max-width: 600px) {
+  .home-container {
+    padding: 20px;
+  }
+
+  .home-container h2 {
+    font-size: 26px;
+  }
+
+  .home-container .intro {
+    font-size: 16px;
+  }
+
+  .visitor-actions {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .visitor-actions button {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-container,
+  .home-container h2,
+  .home-container .intro,
+  .visitor-actions,
+  .home-image {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
 }

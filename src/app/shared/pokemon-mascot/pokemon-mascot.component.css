@@ -1,0 +1,101 @@
+.mascot-container {
+  position: fixed;
+  bottom: 180px;
+  right: 100px;
+  z-index: 9999;
+}
+
+.mascot-wrapper {
+  position: relative; /* permet à la bulle de suivre la mascotte */
+}
+
+/* Mascotte */
+.mascot {
+  width: 160px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+.mascot:active {
+  transform: scale(1.1);
+}
+
+/* Petit shake au clic */
+@keyframes shake {
+  0% { transform: translate(0,0) rotate(0deg); }
+  25% { transform: translate(-5px,0) rotate(-10deg); }
+  50% { transform: translate(5px,0) rotate(10deg); }
+  75% { transform: translate(-5px,0) rotate(-10deg); }
+  100% { transform: translate(0,0) rotate(0deg); }
+}
+
+.mascot.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Animation jump pour booster */
+/* Animation jump pour booster – un seul saut */
+@keyframes jump {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-70px); } /* sommet du saut */
+  100% { transform: translateY(0); }     /* retour au sol */
+}
+
+.mascot.jump {
+  animation: jump 1.5s ease; /* durée plus lente et fluide */
+}
+
+
+/* Emoji heureux */
+.emoji-happy {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  animation: bounce 1.2s ease;
+}
+
+@keyframes bounce {
+  0% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-20px); }
+  100% { transform: translateX(-50%) translateY(0); }
+}
+
+/* Bulle de dialogue */
+.speech-bubble {
+  position: absolute;
+  bottom: 100%; /* juste au-dessus de la mascotte */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 2px solid #333;
+  border-radius: 15px;
+  padding: 8px 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10000;
+  animation: pop 0.5s ease forwards;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 10px 8px 0 8px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+
+@keyframes pop {
+  0% { transform: translateX(-50%) translateY(0) scale(0.3); opacity: 0; }
+  50% { transform: translateX(-50%) translateY(-10px) scale(1.1); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(-20px) scale(1); opacity: 1; }
+}

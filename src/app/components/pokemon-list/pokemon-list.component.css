@@ -19,6 +19,9 @@
   height: 180px;
   border-radius: 12px;
   border: 3px solid #fff;
+  background: none;
+  appearance: none;
+  -webkit-appearance: none;
   cursor: pointer;
   overflow: hidden;
   box-shadow: 0 6px 12px rgba(0,0,0,0.45);
@@ -31,28 +34,33 @@
   align-items: flex-end;
   justify-content: center;
   padding-bottom: 15px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.7);
 }
 
-/* Hover effet */
 .booster-btn:hover {
   transform: translateY(-7px);
   box-shadow: 0 14px 30px rgba(0,0,0,0.6);
 }
 
-/* Couleurs par type */
+/* Focus clavier visible */
+.booster-btn:focus-visible,
+.logout-btn:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.6);
+}
+
+/* Couleurs boosters */
 .booster-btn.eau { background: linear-gradient(to bottom, #5cb6ff, #0066cc); }
 .booster-btn.feu { background: linear-gradient(to bottom, #ff4d4d, #b30000); }
 .booster-btn.electrik { background: linear-gradient(to bottom, #ffd633, #ff9900); }
 .booster-btn.plante { background: linear-gradient(to bottom, #44d944, #007700); }
 .booster-btn.vol { background: linear-gradient(to bottom, #b3b3ff, #4d4d99); }
 
-/* Lumière TCG */
+/* Effet lumière */
 .booster-light {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   border-radius: inherit;
   background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
   opacity: 0;
@@ -60,7 +68,7 @@
   transition: opacity 0.35s ease-in-out;
 }
 
-/* Pokémon cards container */
+/* Cartes Pokémon */
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -69,7 +77,6 @@
   margin-top: 25px;
 }
 
-/* Pokémon card Style TCG */
 .pokemon-card {
   width: 140px;
   height: 200px;
@@ -78,27 +85,21 @@
   background: #f8f8f8;
   text-align: center;
   box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-  position: relative;
   padding: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border: 2px solid #ccc;
-  background-clip: padding-box;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  /* Animation en entrée */
   transform: scale(0) rotateY(90deg);
   animation: popCard 0.4s forwards ease-out;
 }
 
-/* Hover effet carte */
 .pokemon-card:hover {
   transform: scale(1.05) rotateY(0deg);
   box-shadow: 0 15px 25px rgba(0,0,0,0.6);
 }
 
-/* Animation pop */
 @keyframes popCard {
   0% { transform: scale(0) rotateY(100deg); opacity: 0; }
   60% { transform: scale(1.1) rotateY(5deg); opacity: 1; }
@@ -122,7 +123,7 @@
   object-fit: contain;
 }
 
-/* Infos texte */
+/* Infos */
 .pokemon-info {
   padding: 5px;
   display: flex;
@@ -130,7 +131,7 @@
   gap: 3px;
 }
 
-.pokemon-info h3 {
+.pokemon-info h4 {
   margin: 0;
   font-size: 14px;
   font-weight: bold;
@@ -148,25 +149,7 @@
   color: #d48a00;
 }
 
-/* Bouton supprimer */
-.delete-btn {
-  width: 80%;
-  margin: 5px auto;
-  background: #ff4444;
-  border: none;
-  color: white;
-  padding: 4px 6px;
-  font-size: 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.delete-btn:hover {
-  background: #b30000;
-}
-
-/* Bouton déconnexion */
+/* Déconnexion */
 .logout-btn {
   padding: 6px 12px;
   background-color: #ff4d4d;
@@ -180,48 +163,36 @@
   background-color: #b30000;
 }
 
-/* Header collection */
+/* Header */
 .header-collection {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
 }
-/* Pagination container */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  gap: 10px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+/* Texte lecteur d’écran uniquement */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-/* Page info text */
-.pagination span {
-  font-weight: bold;
-  color: #333;
-}
+/* Réduction animations */
+@media (prefers-reduced-motion: reduce) {
+  .pokemon-card {
+    animation: none;
+    transform: none;
+  }
 
-/* Pagination buttons */
-.pagination button {
-  padding: 8px 16px;
-  background-color: #4CAF50; /* vert */
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.2s ease;
-}
-
-.pagination button:hover:not(:disabled) {
-  background-color: #45a049;
-  transform: scale(1.05);
-}
-
-.pagination button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-  transform: none;
+  .booster-btn,
+  .pokemon-card {
+    transition: none;
+  }
 }

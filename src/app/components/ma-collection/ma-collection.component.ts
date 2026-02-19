@@ -30,7 +30,7 @@ export class MaCollectionComponent implements OnInit {
  loadPokemons(): void {
    this.pokemonService.getMyPokemons().subscribe({
      next: res => {
-       this.allPokemons = res.content; // <-- contient TOUTES les cartes
+       this.allPokemons = res.content;
        this.totalPages = Math.ceil(this.allPokemons.length / this.pageSize);
        this.updatePage();
      },

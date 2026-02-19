@@ -1,7 +1,7 @@
 <header>
-  <nav class="navbar">
+  <nav class="navbar" role="navigation" aria-label="Navigation principale">
     <div class="logo">
-<!--      <img src="assets/images/pokemon.png" alt="Pokéball" />-->
+      <!-- <img src="assets/images/pokemon.png" alt="Pokéball" /> -->
       <h1>PokéApp</h1>
     </div>
 
@@ -14,8 +14,9 @@
   </nav>
 </header>
 
-<main class="content">
+<main class="content" role="main">
   <router-outlet></router-outlet>
+  <app-pokemon-mascot></app-pokemon-mascot>
 </main>
 
 <footer>
